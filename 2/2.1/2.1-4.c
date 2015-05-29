@@ -29,17 +29,17 @@ int main(){
 	
 	sum = 0;
 	for(i=n;i>0;i--){
-		sum = A[i] + B[i] + C[i];
+		sum = A[i-1] + B[i-1] + C[i-1];
 		if(sum==0 || sum ==1){
-			C[i] = sum;
+			C[i-1] = sum;
 		}
 		else if(sum==2){
-			C[i] = 0;
-			C[i+1] = 1;
+			C[i-1] = 0;
+			C[i] = 1;
 		}
 		else if(sum == 3){
-			C[i] = 1;
-			C[i+1] = 1; 
+			C[i-1] = 1;
+			C[i] = 1; 
 		}
 		
 	}
