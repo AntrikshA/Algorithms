@@ -1,82 +1,83 @@
-/* Using Figure 2.4 as a model, illustrate the operation of merge sort on the Aay
-A = {3; 41; 52; 26; 38; 57; 9; 49}.
-*/
-
 #include <stdio.h>
+#include <stdlib.h>
 
-int A[] = {3, 41, 52, 26, 38, 57, 9, 49};
+int in[100];
 
-int merge_sort(int p, int r ){
-	int q;
-	if(p<r){
-		q=((p+r)/2);
-		merge_sort(p,q);
-		merge_sort(q+1,r);
-		merge(p,q,r);	
+int merge_sort(int s, int e){
+	int c;
+	if(s<e){
+		c = (s+e)/2;
+		merge_sort(s,c);
+		merge_sort(c+1,e);
+		merge(s,c,e);
 	}
-		
 }
 
-int merge(int l, int m, int r)
-{
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 =  r - m;
- 
-    // create temp Arrays 
-    int L[n1], R[n2];
- 
-    // Copy data to temp Arrays L[] and R[] 
-    for (i = 0; i < n1; i++)
-        L[i] = A[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = A[m + 1+ j];
- 
-    // Merge the temp arrays back into A[l..r]
-	i = 0;
-    j = 0;
-    k = l;
-    while (i < n1 && j < n2)
-    {
-        if (L[i] <= R[j])
-        {
-            A[k] = L[i];
-            i++;
-        }
-        else
-        {
-            A[k] = R[j];
-            j++;
-        }
-        k++;
-    }
- 
-    // Copy the remaining elements of L[], if there are any 
-    while (i < n1)
-    {
-        A[k] = L[i];
+int merge(int s,int c, int e){
+	int m,n,i,j,k;
+	int a[100], b[100];
+	
+	m = c-s+1;
+	n = e-c;
+
+	for(i=0;i<m;i++){
+		a[i]=in[s+i];
+	}
+	for(j=0;j<n;j++){
+		b[j]=in[j+c+1];
+	}
+
+	i=0;j=0;k=s;
+	printf("%d %d %d | %d %d | %d-%d %d-%d\n",s,c,e,m,n,s+i,a[i],j+c+1,b[j] );
+	while(i<m && j<n){
+		if(a[i] <= b[j]){
+			in[k]=a[i];
+			i++;
+			k++;
+		}
+		else if(b[j] <= a[i]){
+			in[k]=b[j];
+			j++;
+			k++;
+		}
+	}
+
+	while(i<m){
+        in[k] = a[i];
         i++;
         k++;
-    }
- 
-    // Copy the remaining elements of R[], if there are any 
-    while (j < n2)
-    {
-        A[k] = R[j];
+    } 
+    while(j<n){
+        in[k] = b[j];
         j++;
         k++;
     }
+    for(i=0;i<e;i++){
+		printf("%d ",in[i]);
+	}
+	printf("\n");
 }
 
 int main(){
-	int i;
-	printf("Unsorted : \n");
-	for(i=0;i<8;i++){
-		printf("A[%d] : %d\n",i+1,A[i]);
+	int n,i;
+	
+	printf("Enter size (max 100) : \n");
+	scanf("%d",&n);
+	
+	printf("Enter an %d values\n",n );
+	for(i=0;i<n;i++){
+		scanf("%d",&in[i]);
 	}
-	merge_sort(0,7);
-	printf("Sorted : \n");
-	for(i=0;i<8;i++){
-		printf("A[%d] : %d\n",i+1,A[i]);
+	
+	printf("Values received :\n");
+	for(i=0;i<n;i++){
+		printf("%d\n",in[i]);
+	}
+	
+	printf("Sorting now...\n");
+	merge_sort(0,n-1);
+
+	for(i=0;i<n;i++){
+		printf("%d\n",in[i]);
 	}
 }
