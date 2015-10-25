@@ -28,7 +28,6 @@ int merge(int s,int c, int e){
 	}
 
 	i=0;j=0;k=s;
-	printf("%d %d %d | %d %d | %d-%d %d-%d\n",s,c,e,m,n,s+i,a[i],j+c+1,b[j] );
 	while(i<m && j<n){
 		if(a[i] <= b[j]){
 			in[k]=a[i];
@@ -52,10 +51,6 @@ int merge(int s,int c, int e){
         j++;
         k++;
     }
-    for(i=0;i<e;i++){
-		printf("%d ",in[i]);
-	}
-	printf("\n");
 }
 
 int main(){
