@@ -3,7 +3,7 @@ import numpy as np
 from decimal import *
 import pandas as pd
 from pandas import Categorical
-from scipy.sparse import csr_matrix, csgraph, csc_matrix
+from scipy.sparse import csr_matrix
 
 
 def PageRank():
@@ -28,8 +28,11 @@ def PageRank():
     end = time.time()
     print "Time to initialise matrices :", end - start
 
+
+    # I need to divide all elements of M by their out-degrees, and I need those in matrix form : M
     start = time.time()
     beta = 0.85
+    epsilon = 0.000001
     rank = np.ones(size)
     t = 1
     while 1:
@@ -37,19 +40,15 @@ def PageRank():
         rankp = np.zeros(size)
         for i in categories:
             try:
-                for j in range(i):
-                    rankp[i] +=  float(beta * float(float(rank[j]) / float(M[i].getnnz())))
+                rankp[i] +=  float(beta * float(float(sum(rank[:i])) / )) # I want beta*SUM(rank[j->i]/M[j->i])
             except ZeroDivisionError:
-                rankp[i] +=  0
-                continue
+                rankp[i] += 0
 
-        S = float(sum(rankp))
-
-        for i in categories:
+            S = float(sum(rankp[:i]))
             rank[i] = float(float(rankp[i]) + float((1-S)/float(size)))
 
         t += 1
-        if rank.all() == rank0.all():
+        if (sum(rank)-sum(rank0))<epsilon:
             break
 
     end = time.time()
