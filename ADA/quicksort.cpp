@@ -66,7 +66,6 @@ int main(){
 	SIZE=0;
 	while(getline(in,line)){
 		array[SIZE] = atoi(line.c_str());
-		// cout<<(array[SIZE])<<endl;
 		SIZE++;
 	}
 
