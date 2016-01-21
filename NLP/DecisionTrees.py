@@ -2,7 +2,8 @@
 
 class DecisionTrees():
 	# Main class
-	infogain
+	# first have a defined dataset of sentences with their ends on a period "."
+	# Calculate info gain on each of the attributes
 
 	def __init__(self):
 		print 'Welcome to Decision Trees'
