@@ -1,6 +1,7 @@
-// Compute Minimum Edit Distance, in JAVA
+// Weighted Minimum Edit Distance, in JAVA
+// just input separate little lookup tables for del, ins and subs !
 
-public class MinEditDist { 
+public class WeightMinDist { 
 
 	// public static:
 	static String x = "hello";
