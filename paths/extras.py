@@ -17,17 +17,3 @@ def BFS(graph, start):      #Implement BFS here
             visited.add(vertex)
             queue.extend(graph[vertex] - visited)
     return visited
-
-# def calc_dijkstra(G):
-#     # pass
-#     return dijkstra(csgraph, directed=True)
-    
-
-def distance(s,t,U):
-
-    if s==u:
-        return 0
-    
-    dapprox = min([distance(s,u,U)+distance(u,t,U) for u in U])
-
-    return dapprox

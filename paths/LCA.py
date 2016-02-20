@@ -45,7 +45,7 @@ def path_to_u(s,u,fil):
 
 	return result
 
-def dist_LCA(s,t):
+def dist_LCA(s,t,fil):
 	pi1 = path_to_u(s,u)
 	pi2 = path_to_u(t,pi1)
 	LCA = pi2[-1]
@@ -54,7 +54,7 @@ def dist_LCA(s,t):
 	return pi2+pi3
 
 
-def dist_SC(s,t):
+def dist_SC(s,t,fil):
 	pi1 = path_to_u(s,u)
 	pi2 = path_to_u(t,pi1)
 	LCA = pi2[-1]

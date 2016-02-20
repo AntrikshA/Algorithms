@@ -18,21 +18,27 @@
 from select_landmarks import *
 from extras import *
 from init import *
+from SPT import *
 import numpy as np
+import operator
 
-def landmarks_basic(s,t,U):
-	dapprox = distance(s,t,U)
-	return dapprox
 
-def precompute(G,fil):
-	
-	U = select(G,fil,k)
+def distance(s, t, U):
 
-	all_ids = np.unique(fil.values)
+    dapprox = min([sum(shortest_dist(s, u, fil).values()) +
+                   sum(shortest_dist(u, t, fil).values()) for u in U])
 
-	du = np.array((len(U)))
-	for u in U:
-		BFS(u)		#Implement
-		for v in V:
-			du[v] = distance(u,v)
+    return dapprox
 
+
+def precompute(M, k, fil):
+    U = best_coverage(M, k, fil)
+
+    V = np.unique(fil.values)
+
+    d = np.zeros((len(U), len(V)))
+    for u in xrange(len(U)):
+        for v in xrange(len(V)):
+            d[u, v] = sum(shortest_dist(U[u], V[v], fil).values())
+
+    return d
