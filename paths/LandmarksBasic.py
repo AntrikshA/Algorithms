@@ -21,12 +21,7 @@ from init import *
 import numpy as np
 
 def landmarks_basic(s,t,U):
-	d = []
-	for u in U:
-		d += du[s]+du[t]
-
-	dapprox = min(d)
-
+	dapprox = distance(s,t,U)
 	return dapprox
 
 def precompute(G,fil):

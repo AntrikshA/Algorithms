@@ -25,6 +25,9 @@ def BFS(graph, start):      #Implement BFS here
 
 def distance(s,t,U):
 
-    dapprox = min([distance(s,u)+distance(u,t) for u in U])
+    if s==u:
+        return 0
+    
+    dapprox = min([distance(s,u,U)+distance(u,t,U) for u in U])
 
     return dapprox

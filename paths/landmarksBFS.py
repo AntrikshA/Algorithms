@@ -18,17 +18,31 @@
 
 from extras import *
 from LCA import *
+from SPT import *
+import networkx as nx
 
-def landmarkBFS(s,t,U):
-	S = []
-	
-	#U = {u1 , u2 , . . . , uk } of k landmarks
-	for u in U:				#U unknown
-		S += path_to_u(s,u)			#Algorithm 2
-		S += path_to_u(t,u)
 
-	G[S] = subgraph(G,S)
+def landmarkBFS(s, t, U, fil):
+    S = []
 
-	pi = BFS(s,t)
+    E = [(x[1], x[2], {'weight': x[3]}) for x in fil.itertuples()]
 
-	return pi
+    K = nx.Graph()
+    K.add_edges_from(E)
+
+    d, p = nx.single_source_dijkstra(
+            K, s, target=t, weight='weight')
+    
+    for u in U:
+        S += path_to_u(s,u,fil)         #Algorithm 2
+        S += path_to_u(t,u,fil)
+
+    G = nx.Graph()
+    
+    for i in S:
+        G.add_path(i)
+
+    d, pi = nx.single_source_dijkstra(
+            G, s, target=t, weight='weight')
+
+    return pi

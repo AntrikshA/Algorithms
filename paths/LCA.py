@@ -34,19 +34,14 @@
 # 26: return Best
 # 27: end function
 
+from SPT import *
 
-def path_to_u(s,pi,fil):
+def path_to_u(s,u,fil):
 	"""Returns path in the SPT"""
-	result = [s]
+	result = []
 
-	while s not in pi:
-		s = SPT(u,s)		#pu unknown
-
-		# pu[v] is the next vertex
-		# on an arbitrarily chosen shortest path from a vertex v to a
-		# landmark u.
-
-		result.append(s)
+	p = shortest_path(s,u,fil)
+	result.append(p)
 
 	return result
 
@@ -70,7 +65,7 @@ def dist_SC(s,t):
 	l = set(pi2*pi3).intersection(E)
 
 	for w,w1 in l:
-		current = #Not understanding
+		current = 1#Not understanding
 		best = min(current,best)
 
 	return best
