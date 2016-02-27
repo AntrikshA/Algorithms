@@ -36,77 +36,81 @@
 	27: end function
 """
 
-
 from SPT import *
 from LandmarksBasic import *
+from itertools import permutations, repeat, product
 
 
-def path_to_u(s, U, d, K):
-    result = []
+def path_to_u(s, lm, d, Udict):
 
-    dapprox = 99999
-    for u in U:
-        if d[s, u] < dapprox:
-            dapprox = d[s, u]
-            lm = u
+    d, p = shortest_path(s, lm, Udict[lm])
 
-    p = shortest_path(s, lm, Udict[lm])
-    result.append(p)
-
-    return result
+    return p
 
 
 def dist_LCA(s, t, U, G, d, Udict):
 
-    d1, pi1 = path_to_u(s, U, d)
+    d3, lm = distance(s, t, U, d)
+
+    pi1 = path_to_u(s, lm, d, Udict)
 
     H = nx.Graph()
     H.add_path(pi1)
     pi1_nodes = H.nodes()
 
-    d2, pi2 = path_to_u(t, U, d, G)
+    pi2 = path_to_u(t, lm, d, Udict)
 
     H = nx.Graph()
     H.add_path(pi2)
     pi2_nodes = H.nodes()
 
-    K = set(pi2_nodes).intersection(pi1_nodes)
-    d3, LCA = distance(s, t, K, d)
+    LCA = set(pi1_nodes).intersection(pi2_nodes)
 
-    d3, pi3 = shortest_path(s, LCA, Udict[LCA])
-    d4, pi4 = shortest_path(t, LCA, Udict[LCA])
+    d3, pi3 = shortest_path(s, LCA, Udict[lm])
+    d4, pi4 = shortest_path(t, LCA, Udict[lm])
 
     best = sum(d3.values()) + sum(d4.values())
 
     return best, LCA
 
 
-def dist_SC(s, t, U, G, d, Udict):
-    d1, pi1 = path_to_u(s, U, d)
+def dist_SC(s, t, U, G, d, Udict, V):
+
+    d3, lm = distance(s, t, U, d, V)
+
+    pi1 = path_to_u(s, lm, d, Udict)
 
     H = nx.Graph()
     H.add_path(pi1)
     pi1_nodes = H.nodes()
 
-    d2, pi2 = path_to_u(t, U, d, G)
+    pi2 = path_to_u(t, lm, d, Udict)
 
     H = nx.Graph()
     H.add_path(pi2)
     pi2_nodes = H.nodes()
 
-    K = set(pi2_nodes).intersection(pi1_nodes)
-    d3, LCA = distance(s, t, K, d)
+    LCA = set(pi1_nodes).intersection(pi2_nodes)
 
-    d3, pi3 = shortest_path(s, LCA, Udict[LCA])
-    d4, pi4 = shortest_path(t, LCA, Udict[LCA])
+    d3, pi3 = shortest_path(s, LCA, Udict[lm])
+    d4, pi4 = shortest_path(t, LCA, Udict[lm])
 
     best = sum(d3.values()) + sum(d4.values())
 
-    # Shortcutting needs to be implemeted
-    l = set(pi3 * pi4).intersection(E)
+    A = nx.Graph()
+    A.add_path(pi3)
+    pi3_nodes = A.nodes()
+    B = nx.Graph()
+    B.add_path(pi4)
+    pi4_nodes = B.nodes()
 
-    for w, w1 in l:
-        current = 1  # Not understanding
-        best = min(current, best)
+    i = set(product(pi3_nodes, pi4_nodes))
+    i = i - (set(A.edges()) + set(B.edges()))
+    l = [i.intersection(G.edges())]
+    print l
+
+    # for (w, w1) in l:
+    #     current = 1  # Not understanding
+    #     best = min(current, best)
 
     return best

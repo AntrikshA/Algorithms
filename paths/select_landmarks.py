@@ -37,7 +37,7 @@ import operator
 from collections import Counter
 from SPT import *
 
-
+#Unused code
 def highest_degree(fil):
     print "Finding degrees for all..."
     start = time.time()
