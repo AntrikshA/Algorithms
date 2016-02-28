@@ -54,10 +54,10 @@ def shortest_path(s, t, K):
         H.add_path(path)
         p_nodes = H.nodes()
         if t not in p_nodes:
-            path = {}
-            distance = {s: 99999}
+            path = None
+            distance = {s: None}
     except KeyError:
-        path = {}
-        distance = 0
+        path = None
+        distance = {s: None}
 
     return distance, path

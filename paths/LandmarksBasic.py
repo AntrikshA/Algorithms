@@ -29,10 +29,10 @@ import networkx as nx
 def distance(s, t, U, d, V):
 
     dapprox = 99999
-    lm = U[0]
+    lm = None
     for u in U:
-        if d[U.index(u), np.where(V == s)] + d[U.index(u), np.where(V == t)] <= dapprox:
-            dapprox = d[s, u] + d[u, t]
+        if d[U.index(u), np.where(V == s)] + d[U.index(u), np.where(V == t)] < dapprox:
+            dapprox = d[U.index(u), np.where(V == s)] + d[U.index(u), np.where(V == t)]
             lm = u
 
     return dapprox, lm

@@ -77,8 +77,10 @@ def best_coverage(M, k, G, fil):
     Vp = []
     for p in P:
         H = nx.Graph()
-        # print p
-        H.add_path(p)
+        try:
+            H.add_path(p)
+        except TypeError:
+            continue
         Vp += H.nodes()
 
     print "Collecting most frequent", k,"..."
