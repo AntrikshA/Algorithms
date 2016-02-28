@@ -72,7 +72,7 @@ def dist_LCA(s, t, U, G, d, Udict, V):
         d3, pi3 = shortest_path(s, l, Udict[lm])
         d4, pi4 = shortest_path(t, l, Udict[lm])
         try:
-            dapprox = sum(d3.values()) + sum(d4.values())
+            dapprox = d3[l] + d4[l]
         except TypeError:
             continue
         # print dapprox
@@ -107,10 +107,9 @@ def dist_SC(s, t, U, G, d, Udict, V):
         d1, p = shortest_path(s, l, Udict[lm])
         d2, p = shortest_path(t, l, Udict[lm])
         try:
-            dapprox = sum(d3.values()) + sum(d4.values())
+            dapprox = d1[l] + d2[l]
         except TypeError:
             continue
-        # print dapprox
         if dapprox < best:
             d3, pi3 = shortest_path(s, l, Udict[lm])
             d4, pi4 = shortest_path(t, l, Udict[lm])
@@ -125,12 +124,20 @@ def dist_SC(s, t, U, G, d, Udict, V):
     pi4_nodes = B.nodes()
 
     i = set(product(pi3_nodes, pi4_nodes))
-    i = i - (set(A.edges()) + set(B.edges()))
-    l = [i.intersection(G.edges())]
-    print l
+    i = i - (set(A.edges()) & set(B.edges()))
+    sc_edges = [i.intersection(G.edges())]
 
-    # for (w, w1) in l:
-    #     current = 1  # Not understanding
-    #     best = min(current, best)
+    for edge in sc_edges[0]:
+        w,w1 = edge
+        try:
+            d1 = shortest_path(s, w, Udict[lm])[0][w]
+            d3 = shortest_path(w1, t, Udict[lm])[0][t]
+            d = d1 + d3
+        except TypeError:
+            continue
+        
+        d2 = shortest_path(w, w1, Udict[lm])[0][w1]
+        current = d + d3
+        best = min(current, best)
 
     return best
