@@ -83,7 +83,7 @@ def best_coverage(M, k, G, fil):
             continue
         Vp += H.nodes()
 
-    print "Collecting most frequent", k,"..."
+    print "Collecting most frequent", k,"..." ##change
     Vp = sorted(Counter(Vp).items(), key=operator.itemgetter(1), reverse=True)
 
     V = [v[0] for v in Vp]

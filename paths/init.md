@@ -13,8 +13,7 @@ V = np.unique(e)
 U,Udict = best_coverage(50,10,G,fil)
 d = np.zeros((len(U),len(V)))
 d = precompute(U,d,G,V)
-s = 117539
-t = 168675
+s,t = random(V)
 dist_LCA(s, t, U, G, d, Udict, V)
 dist_SC(s, t, U, G, d, Udict, V)
 shortest_path(s,t,G)[0][t]
