@@ -37,7 +37,9 @@ import operator
 from collections import Counter
 from SPT import *
 
-#Unused code
+# Unused code
+
+
 def highest_degree(fil):
     print "Finding degrees for all..."
     start = time.time()
@@ -66,33 +68,33 @@ def best_coverage(M, k, G, fil):
 
     P = []
 
-    print "Randomizing to", M, "..."
+    print "Randomizing ..."
     for i in xrange(M):
-        s, t = random(nodes)
+        s, t = randm(nodes)
         d, p = shortest_path(s, t, G)
-        P += [p]
+        P += [p[t]]
 
-    # print P
-    print 'Collecting vertices ...'
-    Vp = []
-    for p in P:
-        H = nx.Graph()
-        try:
-            H.add_path(p)
-        except TypeError:
-            continue
-        Vp += H.nodes()
+    paths = P
+    print "Collecting landmarks ..."
+    U = []
+    for path in paths:
+        Vp = []
+        if P:
+            for i in P:
+                Vp += i
+            del P[0]
 
-    print "Collecting most frequent", k,"..."
-    Vp = sorted(Counter(Vp).items(), key=operator.itemgetter(1), reverse=True)
+            Vp = sorted(Counter(Vp).items(),
+                        key=operator.itemgetter(1), reverse=True)
+            V = [v[0] for v in Vp if v[1] > 2 and v[0] in path]
 
-    V = [v[0] for v in Vp]
+            U += V[0]
 
-    U = V[:k]
+    U = list(set(U[:k]))
 
     print "Collecting all path trees ..."
     Udict = {}
     for u in U:
-        Udict[u] = path_tree(u,G)
+        Udict[u] = path_tree(u, G)
 
     return U, Udict

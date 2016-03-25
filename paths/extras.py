@@ -3,10 +3,13 @@
 from init import *
 import random
 
-def random(nodes):
+def randm(nodes):
     import random
-    a = random.randint(0,len(nodes)-1)
-    b = random.randint(0,len(nodes)-1)
+    a=0
+    b=0
+    while a==b:
+        a = random.randint(0,len(nodes)-1)
+        b = random.randint(0,len(nodes)-1)
     return nodes[a],nodes[b]
 
 def BFS(graph, start):      #Implement BFS here
