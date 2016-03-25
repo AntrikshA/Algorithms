@@ -72,7 +72,7 @@ def best_coverage(M, k, G, fil):
     for i in xrange(M):
         s, t = randm(nodes)
         d, p = shortest_path(s, t, G)
-        P += [p[t]]
+        P += [p]
 
     paths = P
     print "Collecting landmarks ..."

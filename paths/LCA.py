@@ -43,7 +43,7 @@ from itertools import permutations, repeat, product
 
 def path_to_u(s, lm, d, Udict):
 
-    d, p = shortest_path(s, lm, Udict[lm])
+    d1, p = shortest_path(s, lm, Udict[lm])
 
     return p
 
@@ -88,16 +88,10 @@ def dist_SC(s, t, U, G, d, Udict, V):
     d3, lm = distance(s, t, U, d, V)
 
     pi1 = path_to_u(s, lm, d, Udict)
-    H = nx.Graph()
-    H.add_path(pi1)
-    pi1_nodes = H.nodes()
 
     pi2 = path_to_u(t, lm, d, Udict)
-    H = nx.Graph()
-    H.add_path(pi2)
-    pi2_nodes = H.nodes()
 
-    LCA = set(pi1_nodes).intersection(pi2_nodes)
+    LCA = set(pi1).intersection(pi2)
     print 'Number of nodes in LCA', len(LCA)
 
     best = 99999999
@@ -116,14 +110,7 @@ def dist_SC(s, t, U, G, d, Udict, V):
             best = dapprox
             lca = l
 
-    A = nx.Graph()
-    A.add_path(pi3)
-    pi3_nodes = A.nodes()
-    B = nx.Graph()
-    B.add_path(pi4)
-    pi4_nodes = B.nodes()
-
-    i = set(product(pi3_nodes, pi4_nodes))
+    i = set(product(pi3, pi4))
     i = i - (set(A.edges()) & set(B.edges()))
     sc_edges = [i.intersection(G.edges())]
 
@@ -140,4 +127,4 @@ def dist_SC(s, t, U, G, d, Udict, V):
         current = d + d3
         best = min(current, best)
 
-    return best
+    return best, pi3,pi4

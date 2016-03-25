@@ -43,4 +43,4 @@ def shortest_path(s, t, K):
         path = None
         distance = {s: None}
 
-    return distance, path
+    return distance[t], path[t]
