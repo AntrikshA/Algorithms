@@ -28,19 +28,13 @@ def shortest_dist(s, t, K):
     return distance
 
 
-def shortest_path(s, t, K):
+def shortest_path(s, K):
 
     try:
         distance, path = nx.single_source_dijkstra(
-            K, s, target=t, weight='weight')
-        H = nx.Graph()
-        H.add_path(path)
-        p_nodes = H.nodes()
-        if t not in p_nodes:
-            path = None
-            distance = {s: None}
+            K, s, weight='weight')
     except KeyError:
         path = None
         distance = {s: None}
 
-    return distance[t], path[t]
+    return distance, path

@@ -24,3 +24,4 @@ W	X	1
 X	Y	1
 Y	Z	1
 Z	A	1
+A	M	1

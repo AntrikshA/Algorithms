@@ -4,13 +4,13 @@ import numpy as np
 from scipy.sparse import csr_matrix
 import networkx as nx
 
-FILE = 'testedges.txt'
+FILE = 'testedges1.txt'
 
 
-def read_file():
+def read_file(fname=FILE):
     print "Loading edges file.."
     start = time.time()
-    fil = pd.read_csv(FILE, sep='\s',
+    fil = pd.read_csv(fname, sep='\s',
                       names=['to', 'from', 'weight'], engine='python')
 
     end = time.time()

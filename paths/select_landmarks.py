@@ -71,8 +71,8 @@ def best_coverage(M, k, G, fil):
     print "Randomizing ..."
     for i in xrange(M):
         s, t = randm(nodes)
-        d, p = shortest_path(s, t, G)
-        P += [p]
+        d, p = shortest_path(s, G)
+        P += [p[t]]
 
     paths = P
     print "Collecting landmarks ..."
@@ -86,9 +86,11 @@ def best_coverage(M, k, G, fil):
 
             Vp = sorted(Counter(Vp).items(),
                         key=operator.itemgetter(1), reverse=True)
-            V = [v[0] for v in Vp if v[1] > 2 and v[0] in path]
+            V = [(v) for v in Vp if v[1] > 2 and v[0] in path]
 
-            U += V[0]
+            U += [(V[0])]
+
+    print U
 
     U = list(set(U[:k]))
 

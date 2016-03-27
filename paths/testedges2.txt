@@ -1,0 +1,10 @@
+A	B	1
+B	C	1
+C	D	1
+E	D	1
+D	F	1
+H	G	1
+G	F	1
+F	U	1
+K	U	1
+B	E	1
