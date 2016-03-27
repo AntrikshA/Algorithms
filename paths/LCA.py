@@ -105,30 +105,36 @@ def dist_SC(s, t, U, G, d, Udict, V):
             best = dapprox
             lca = l
 
-    A = nx.Graph()
-    A.add_path(pi3[lca])
+    A = Udict[lm].subgraph(pi4[lca])
+    B = Udict[lm].subgraph(pi4[lca])
 
-    B = nx.Graph()
-    B.add_path(pi4[lca])
+    e = G.edges()
+
+    e = set([tuple(sorted(x)) for x in e])
 
     i = set(product(pi3[lca], pi4[lca]))
-    # print i, set(A.edges()) & set(B.edges())
     i = i - (set(A.edges()) & set(B.edges()))
-    sc_edges = [i.intersection(G.edges())]
+    i = set([tuple(sorted(x)) for x in i])
+    sc_edges = [i.intersection(e)]
+    # print sc_edges
+    # print i
+    # print G.edges()
+    # print set(A.edges())
+    # print set(B.edges())
+    # print set(A.edges()) & set(B.edges())
 
+    current = best
+    dist = 0
     for edge in sc_edges[0]:
         w, w1 = edge
-        # print w, w1
-        try:
-            d1 = shortest_path(s, Udict[lm])[0][w]
-            d3 = shortest_path(w1, Udict[lm])[0][t]
-            d = d1 + d3
-        except TypeError:
-            continue
+        d1 = shortest_path(s, Udict[lm])[0][w]
+        d3 = shortest_path(w1, Udict[lm])[0][t]
+        # print shortest_path(w1, Udict[lm])[0]
+        # print dist, d1, d3
+        dist = d1 + d3
 
         d2 = shortest_path(w, Udict[lm])[0][w1]
-        current = d + d3
-        # print current, best
+        current = dist + d2
         best = min(current, best)
 
-    return best, pi3[lca], pi4[lca]
+    return best

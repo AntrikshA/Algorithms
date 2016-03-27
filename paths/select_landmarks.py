@@ -63,49 +63,50 @@ def highest_degree(fil):
 
 def best_coverage(M, k, G, fil):
 
-    # e = zip(fil['from'], fil['to'])
-    # nodes = np.unique(e)
+    e = zip(fil['from'], fil['to'])
+    nodes = np.unique(e)
 
-    # P = []
+    P = []
 
-    # print "Randomizing ..."
-    # for i in xrange(M):
-    #     s, t = randm(nodes)
-    #     d, p = shortest_path(s, G)
-    #     P += [p[t]]
+    print "Randomizing ..."
+    for i in xrange(M):
+        s, t = randm(nodes)
+        d, p = shortest_path(s, G)
+        P += [p[t]]
 
-    # paths = P
-    # print "Collecting landmarks ..."
-    # U = []
-    # for path in paths:
-    #     Vp = []
-    #     if P:
-    #         for i in P:
-    #             Vp += i
-    #         del P[0]
+    paths = P
+    print "Collecting landmarks ..."
+    U = []
+    for path in paths:
+        Vp = []
+        if P:
+            for i in P:
+                Vp += i
+            del P[0]
 
-    #         Vp = sorted(Counter(Vp).items(),
-    #                     key=operator.itemgetter(1), reverse=True)
-    #         V = [(v) for v in Vp if v[1] > 2 and v[0] in path]
+            Vp = sorted(Counter(Vp).items(),
+                        key=operator.itemgetter(1), reverse=True)
+            V = [(v) for v in Vp if v[1] > 2 and v[0] in path]
 
-    #         U += [(V[0])]
+            U += [(V[0])]
 
-    # l = []
-    # d = {}
-    # for i in U:
-    #     if i[0] in l:
-    #         d[i[0]] = d[i[0]] + i[1]
-    #     else:
-    #         d[i[0]] = i[1]
-    #         l += [i[0]]
+    l = []
+    d = {}
+    for i in U:
+        if i[0] in l:
+            d[i[0]] = d[i[0]] + i[1]
+        else:
+            d[i[0]] = i[1]
+            l += [i[0]]
 
-    # d = sorted(d.items(),key=operator.itemgetter(1), reverse=True)
-    # U = [v[0] for v in d]
+    d = sorted(d.items(),key=operator.itemgetter(1), reverse=True)
+    U = [v[0] for v in d]
 
-    # U = list(set(U[:k]))
+    U = list(set(U[:k]))
 
     # U = ['U']
-    U = ['G','H']
+    # U = ['G','H']
+    # U = ['A','B']
 
     print "Collecting all path trees ..."
     Udict = {}

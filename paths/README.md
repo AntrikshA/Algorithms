@@ -22,3 +22,20 @@ landmarks BFS done
 Highest degree done
 
 best coverage done
+
+
+
+#Troubles:
+
+Calculating for C ...
+Calculating for D ...
+start,end = I,A
+(4, 'C', ['I', 'H', 'C'], ['A', 'B', 'C'])
+[set([])]
+set([('I', 'B'), ('I', 'A'), ('I', 'C'), ('H', 'C'), ('H', 'B'), ('H', 'A'), ('C', 'A'), ('C', 'C')])
+[('A', 'I'), ('A', 'B'), ('C', 'H'), ('C', 'B'), ('C', 'D'), ('C', 'G'), ('B', 'D'), ('E', 'D'), ('E', 'F'), ('G', 'H'), ('G', 'F'), ('I', 'H')]
+set([('A', 'B'), ('C', 'B')])
+set([('A', 'B'), ('C', 'B')])
+set([('A', 'B'), ('C', 'B')])
+4
+1

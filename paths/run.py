@@ -9,7 +9,7 @@ import networkx as nx
 import time
 import matplotlib.pyplot as plt
 
-fil = read_file("testedges3.txt")
+fil = read_file("testedges2.txt")
 G = create_graph(fil)
 e = zip(fil['from'], fil['to'])
 V = np.unique(e)
@@ -20,34 +20,40 @@ U, Udict = best_coverage(50, 2, G, fil)
 d = np.zeros((len(U), len(V)))
 d = precompute(U, d, G, V)
 
-l = list(set(product(V, V)))
+s,t = randm(V)
+print s,t
+print dist_LCA(s, t, U, G, d, Udict, V)
+print dist_SC(s, t, U, G, d, Udict, V)
+print shortest_path(s, G)[0][t]
+
+# l = list(set(product(V, V)))
 
 # l = []
 # for i in xrange(100):
 #     s, t = randm(V)
 #     l += [(s, t)]
 
-outlca=[]
-start = time.time()
-for i in l:
-    s, t = i
-    outlca += [dist_LCA(s, t, U, G, d, Udict, V)[0]]
+# outlca=[]
+# start = time.time()
+# for i in l:
+#     s, t = i
+#     outlca += [dist_LCA(s, t, U, G, d, Udict, V)[0]]
 
-print "time taken for LCA ..", "{:.10f}".format((time.time() - start) / len(l))
+# print "time taken for LCA ..", "{:.10f}".format((time.time() - start) / len(l))
 
-outsc = []
-start = time.time()
-for i in l:
-    s, t = i
-    outsc += [dist_SC(s, t, U, G, d, Udict, V)[0]]
+# outsc = []
+# start = time.time()
+# for i in l:
+#     s, t = i
+#     outsc += [dist_SC(s, t, U, G, d, Udict, V)[0]]
 
-print "time taken for SC ..", "{:.10f}".format((time.time() - start) / len(l))
+# print "time taken for SC ..", "{:.10f}".format((time.time() - start) / len(l))
 
-out = []
-start = time.time()
-for i in l:
-    s, t = i
-    out += [shortest_path(s, G)[0][t]]
+# out = []
+# start = time.time()
+# for i in l:
+#     s, t = i
+#     out += [shortest_path(s, G)[0][t]]
 
-print "time taken for dijkstra ..", "{:.10f}".format((time.time() - start) / len(l))
-print outsc,out
+# print "time taken for dijkstra ..", "{:.10f}".format((time.time() - start) / len(l))
+# print outsc,out

@@ -10,8 +10,7 @@ def path_tree(s, K):
 
     distance, path = nx.single_source_dijkstra(K, s, weight='weight')
 
-    H = nx.Graph()
-    H.add_path(path)
+    H = K.subgraph(path)
 
     return H
 
