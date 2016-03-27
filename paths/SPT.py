@@ -3,14 +3,14 @@ import operator
 import time
 import networkx as nx
 
-# To make Shortest path trees for all of the landmarks in U
-
 
 def path_tree(s, K):
 
     distance, path = nx.single_source_dijkstra(K, s, weight='weight')
 
     H = K.subgraph(path)
+
+    # print K
 
     return H
 
@@ -28,12 +28,7 @@ def shortest_dist(s, t, K):
 
 
 def shortest_path(s, K):
-
-    try:
-        distance, path = nx.single_source_dijkstra(
-            K, s, weight='weight')
-    except KeyError:
-        path = None
-        distance = {s: None}
+    distance, path = nx.single_source_dijkstra(
+        K, s, weight='weight')
 
     return distance, path

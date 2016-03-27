@@ -43,7 +43,9 @@ from itertools import permutations, repeat, product
 
 def path_to_u(s, lm, d, Udict):
 
+    # print Udict[lm]
     d1, p = shortest_path(s, Udict[lm])
+    # print d1, p
 
     return p[lm]
 

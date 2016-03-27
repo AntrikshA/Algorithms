@@ -68,11 +68,15 @@ def best_coverage(M, k, G, fil):
 
     P = []
 
+    start =time.time()
     print "Randomizing ..."
     for i in xrange(M):
         s, t = randm(nodes)
         d, p = shortest_path(s, G)
-        P += [p[t]]
+        try:
+            P += [p[t]]
+        except KeyError:
+            pass
 
     paths = P
     print "Collecting landmarks ..."
@@ -84,9 +88,10 @@ def best_coverage(M, k, G, fil):
                 Vp += i
             del P[0]
 
+            # print Vp
             Vp = sorted(Counter(Vp).items(),
                         key=operator.itemgetter(1), reverse=True)
-            V = [(v) for v in Vp if v[1] > 2 and v[0] in path]
+            V = [(v) for v in Vp if v[0] in path]
 
             U += [(V[0])]
 
@@ -112,5 +117,7 @@ def best_coverage(M, k, G, fil):
     Udict = {}
     for u in U:
         Udict[u] = path_tree(u, G)
+
+    print 'All done in ..',time.time()-start
 
     return U, Udict

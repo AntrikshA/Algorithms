@@ -19,9 +19,14 @@ def read_file(fname=FILE):
 
 
 def create_graph(fil):
+    print "Creating Graph ..."
+    start = time.time()
     E = [(x[1], x[2], {'weight': x[3]}) for x in fil.itertuples()]
 
+    # print E
     K = nx.Graph()
     K.add_edges_from(E)
+    # print K
+    print "graph created in ..",time.time()-start
 
     return K
