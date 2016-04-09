@@ -31,15 +31,17 @@ def landmarkBFS(s, t, U, K):
     d, p = nx.single_source_dijkstra(
         K, s, target=t, weight='weight')
 
-    S += path_to_u(s, U, K)  # Algorithm 2
-    S += path_to_u(t, U, K)
+    for u in U:
+        S += path_to_u(s, u, K)  # Algorithm 2
+        S += path_to_u(t, u, K)
 
-    G = nx.Graph()
+    G = K.subgraph(S)
+    # print G
 
-    for i in S:
-        G.add_path(i)
+    # for i in S:
+    #     G.add_path(i)
 
     d, pi = nx.single_source_dijkstra(
-        G, s, target=t, weight='weight')
+        G, s, weight='weight')
 
     return pi
