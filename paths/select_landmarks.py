@@ -87,9 +87,8 @@ def best_coverage(M, k, G, fil):
             for i in P:
                 Vp += i
             del P[0]
-
-            # print Vp
-            Vp = sorted(Counter(Vp).items(),
+            # Insert code for degree
+            Vp = sorted(dict(nx.degree(G)).items(),
                         key=operator.itemgetter(1), reverse=True)
             V = [(v) for v in Vp if v[0] in path]
 

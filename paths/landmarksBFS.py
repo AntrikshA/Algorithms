@@ -25,23 +25,16 @@ from SPT import *
 import networkx as nx
 
 
-def landmarkBFS(s, t, U, K):
+def landmarkBFS(s, t, U, K, d, Udict):
     S = []
 
-    d, p = nx.single_source_dijkstra(
-        K, s, target=t, weight='weight')
-
     for u in U:
-        S += path_to_u(s, u, K)  # Algorithm 2
-        S += path_to_u(t, u, K)
+        S += path_to_u(s, u, d, Udict)  # Algorithm 2
+        S += path_to_u(t, u, d, Udict)
 
     G = K.subgraph(S)
-    # print G
 
-    # for i in S:
-    #     G.add_path(i)
+    # print G.edges(data=True)
+    d, pi = shortest_path(s, G)
 
-    d, pi = nx.single_source_dijkstra(
-        G, s, weight='weight')
-
-    return pi
+    return pi[t], d[t]

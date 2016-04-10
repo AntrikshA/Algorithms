@@ -9,14 +9,14 @@ from SPT import *
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-fil = read_file("testedges2.txt")
+fil = read_file("testedges3.txt")
 G = create_graph(fil)
 e = zip(fil['from'], fil['to'])
 V = np.unique(e)
 nx.draw_networkx(G,pos=nx.spring_layout(G),width=2)
 plt.savefig('example2')
 plt.close()
-U,Udict = best_coverage(50,10,G,fil)
+U,Udict = best_coverage(50,2,G,fil)
 d = np.zeros((len(U),len(V)))
 d = precompute(U,d,G,V)
 

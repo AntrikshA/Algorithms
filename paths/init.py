@@ -10,8 +10,8 @@ FILE = 'testedges1.txt'
 def read_file(fname=FILE):
     print "Loading edges file.."
     start = time.time()
-    fil = pd.read_csv(fname, sep='\s',
-                      names=['to', 'from', 'weight'], engine='python')
+    fil = pd.read_csv(fname, sep='[\s]+',
+                      names=['to', 'from', 'weight'], engine='python', comment='#')
 
     end = time.time()
     print "File loaded in", end - start
