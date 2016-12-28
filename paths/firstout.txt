@@ -1,6 +1,0 @@
-I
-time taken for LCA .. 0.0002852988
-time taken for SC .. 0.0004152083
-time taken for dijkstra .. 0.0000340199
-
-II
