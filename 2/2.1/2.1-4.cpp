@@ -5,7 +5,8 @@ an (n + 1)-element array C . State the problem formally and write pseudocode for
 adding the two integers.
 */
 
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int main(){
 	int i, n, sum;

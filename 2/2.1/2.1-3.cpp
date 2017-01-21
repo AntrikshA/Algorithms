@@ -8,7 +8,10 @@ for v. Using a loop invariant, prove that your algorithm is correct. Make sure t
 your loop invariant fulfills the three necessary properties.
 */
 
-#include <stdio.h>
+#include <iostream>
+
+#include "search.h"
+using namespace std;
 
 int main(){
 	int i, n, v, flag;
@@ -21,14 +24,13 @@ int main(){
 	}
 	printf("\nEnter the value v : ");
 	scanf(" %d",&v);
-	flag = 0;
-	for(i=0;i<n;i++){
-		if (A[i] == v){
-			printf("Found at %d\n", i);
-			flag = 1;
-		}
-	}
-	if(flag==0){
+
+	int output = linearSearch(A, v);
+	
+	if(output==NULL){
 		printf("Sorry, the number you entered was not in the list !\n");
+	}
+	else{
+		cout << output << endl;
 	}
 }

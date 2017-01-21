@@ -7,7 +7,9 @@ for only the first n 1 elements, rather than for all n elements? Give the best-c
 and worst-case running times of selection sort in theta-notation.
 */
 
-#include <stdio.h>
+#include <iostream>
+#include "sort.h"
+using namespace std;
 
 int main(){
 	int i, n, j, key;
@@ -19,16 +21,9 @@ int main(){
 		scanf(" %d",&A[i]);
 	}
 
-	for(i=0;i<n;i++){
-		for(j=i+1;j<n;j++){
-			key = A[i];
-			if(A[j]<key){
-				A[i] = A[j];
-				A[j] = key;
-			}
-		}
-	}
-	for(i=0;i<n;i++){
+	*A = selectionSort(A, n);
+
+	for(int i=0;i<n;i++){
 		printf("A[%d] = %d\n",i+1,A[i]);
 	}
 }
