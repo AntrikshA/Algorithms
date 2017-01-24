@@ -16,7 +16,9 @@ int main(){
 	for(i=0;i<8;i++){
 		printf("A[%d] : %d\n",i+1,A[i]);
 	}
+	
 	*A = merge_sort(A,0,7);
+
 	printf("Sorted : \n");
 	for(i=0;i<8;i++){
 		printf("A[%d] : %d\n",i+1,A[i]);

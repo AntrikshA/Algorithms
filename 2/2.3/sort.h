@@ -28,7 +28,6 @@ int insertionSort(int A[], int reverse=false){
 }
 
 int selectionSort(int A[], int n, int reverse=false){
-	// int n=sizeof(A)/sizeof(*A);
 
 	if(not reverse){
 		for(int i=0;i<n;i++){
