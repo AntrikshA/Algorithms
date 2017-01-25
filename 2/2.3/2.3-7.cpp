@@ -1,3 +1,5 @@
+// Need to make this O(n) instead of O(n logn) -- other than merge sort
+
 #include <iostream>
 #include "sort.h"
 using namespace std;
