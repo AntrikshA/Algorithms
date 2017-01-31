@@ -5,22 +5,21 @@
 using namespace std;
 
 void sumx(int S[], int x, int n){
-	for (int i = 0; i < n; i++){
-		int key = x-S[i];
-		int p=i+1;
-		int r = n;
-		while(p<r){
-			int q = (p+r)/2;
-			if (S[q]<key){
-				p=q+1;
-			}
-			else if(S[q]>key){
-				r=q-1;
-			}
-			else{
-				cout << S[i] << "+" << S[q] <<  endl;
-				return;
-			}
+	int i=0, j=n-1;
+	while(i<j){
+		if(S[i]+S[j]==x){
+		    cout << i << ", " << j << ", " << S[i] << " + " << S[j] <<  endl;
+		    return 0;
+		}
+		else if(S[i]+S[j] != x){
+		    if(S[j] > (x-S[i])){
+			j--;
+			continue;
+		    }
+		    if(S[i] < (x-S[j])){
+			i++;
+			continue;
+		    }
 		}
 	}
 	cout << "No two numbers sum to " << x << endl;
