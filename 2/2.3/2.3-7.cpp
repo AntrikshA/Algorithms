@@ -39,8 +39,9 @@ int main(){
 	cin >> n;
 	int k=n;
 	int S[n];
-	while(n--){
-		cin >> S[k-n-1];
+	while(k){
+		cin >> S[n-k];
+		k--;
 	}
 	*S = merge_sort(S,0,n);
 
