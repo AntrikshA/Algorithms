@@ -1,11 +1,12 @@
 // Need to make this O(n) instead of O(n logn) -- other than merge sort
 
 #include <iostream>
+#include <math.h>
 #include "sort.h"
 using namespace std;
 
 void sumx(int S[], int x, int n){
-	for (int i = 0; i < n; i++){
+	for (int i = 0; i < log(n); i++){
 		int key = x-S[i];
 		int p=i+1;
 		int r = n;
