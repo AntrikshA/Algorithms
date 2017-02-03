@@ -5,23 +5,28 @@
 #include "sort.h"
 using namespace std;
 
+// <<<<<<<<<<<<<<<<If you just want a method/idea as to how to do it>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// To make the run time of this algorithm in O(n), keep two pointers on either side of the array and keep reducing 
+// them on conditions till the time both of them are equal to the sum (x in this case)!
+
+// DOCUMENTATION ABOVE ! ^o^
 void sumx(int S[], int x, int n){
-	for (int i = 0; i < log(n); i++){
-		int key = x-S[i];
-		int p=i+1;
-		int r = n;
-		while(p<r){
-			int q = (p+r)/2;
-			if (S[q]<key){
-				p=q+1;
-			}
-			else if(S[q]>key){
-				r=q-1;
-			}
-			else{
-				cout << S[i] << "+" << S[q] <<  endl;
-				return;
-			}
+
+	int i=0, j=n-1;
+	while(i<j){
+		if(S[i]+S[j]==x){
+		    cout << i << ", " << j << ", " << S[i] << " + " << S[j] <<  endl;
+		    return 0;
+		}
+		else if(S[i]+S[j] != x){
+		    if(S[j] > (x-S[i])){
+			j--;
+			continue;
+		    }
+		    if(S[i] < (x-S[j])){
+			i++;
+			continue;
+		    }
 		}
 	}
 	cout << "No two numbers sum to " << x << endl;
