@@ -4,13 +4,13 @@
 ## Topics to take care of
 Self Balancing BSTs
 
-HashMaps
+~HashMaps~
 
-stacks
+~stacks~
 
-arrays
+~arrays~
 
 system design & OOPS
 
 ## TODO
-Practice all chapters till Chap 9 - whatever I could not implement in first try
+~Practice all chapters till Chap 9 - whatever I could not implement in first try~
